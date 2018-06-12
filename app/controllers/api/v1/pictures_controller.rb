@@ -20,9 +20,10 @@ class Api::V1::PicturesController < Api::V1::BaseController
   def create
     @picture = Picture.new(picture_params)
     @picture.user = current_user
+    @picture.created_at = Time.now()
     authorize @picture
     if @picture.save
-      render :show
+      render :show, status: :created
     else
       render_error
     end
