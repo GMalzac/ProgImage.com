@@ -1,6 +1,6 @@
 class Api::V1::PicturesController < Api::V1::BaseController
-  acts_as_token_authentication_handler_for User, except: [ :index, :show ]
-  before_action :set_picture, only: [:show, :update]
+  acts_as_token_authentication_handler_for User
+  before_action :set_picture, only: [:show, :update, :destroy]
 
   def index
     @pictures = policy_scope(Picture)
@@ -15,6 +15,22 @@ class Api::V1::PicturesController < Api::V1::BaseController
     else
       render_error
     end
+  end
+
+  def create
+    @picture = Picture.new(picture_params)
+    @picture.user = current_user
+    authorize @picture
+    if @picture.save
+      render :show
+    else
+      render_error
+    end
+  end
+
+  def destroy
+    @picture.destroy
+    head :no_content
   end
 
   private
