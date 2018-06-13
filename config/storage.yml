@@ -22,14 +22,6 @@ amazon:
 #   service: Disk
 #   root: <%= Rails.root.join("storage") %>
 
-# Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-# amazon:
-#   service: S3
-#   access_key_id: "AKIAJGVXJ2AX4TIZ2JWQ"
-#   secret_access_key: "p7l2htyAFmtsC0G7zNGYMEhvLjyTpDtNKscBg4nA"
-#   region: us-east-1
-#   bucket: your_own_bucket
-
 # Remember not to checkin your GCS keyfile to a repository
 # google:
 #   service: GCS
