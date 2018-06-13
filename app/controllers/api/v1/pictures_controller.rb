@@ -1,4 +1,5 @@
 class Api::V1::PicturesController < Api::V1::BaseController
+  require 'open-uri'
   acts_as_token_authentication_handler_for User
   before_action :set_picture, only: [:show, :update, :destroy]
 
@@ -42,7 +43,7 @@ class Api::V1::PicturesController < Api::V1::BaseController
   end
 
   def picture_params
-    params.require(:picture).permit(:format, :width, :height, :url, :updated_at)
+    params.require(:picture).permit(:format, :width, :height, :url, :updated_at, :image)
   end
 
   def render_error
