@@ -6,4 +6,5 @@ class Picture < ApplicationRecord
   validates :height, presence: true
   validates :url, presence: true
 
+  has_one_attached :image
 end

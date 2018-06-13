@@ -18,15 +18,21 @@ class Api::V1::PicturesController < Api::V1::BaseController
   end
 
   def create
+    # begin
     @picture = Picture.new(picture_params)
     @picture.user = current_user
-    @picture.created_at = Time.now()
+    file_path = "/home/gregoiremalzac/Desktop/Pics/test.png"
+    image = File.open file_path
     authorize @picture
     if @picture.save
+      @picture.image.attach(io: File.open(file_path), filename: 'text.png')
+      @picture.image_url = url_for(@picture.image)
       render :show, status: :created
     else
       render_error
     end
+    # rescue => error
+    # end
   end
 
   def destroy
@@ -42,7 +48,7 @@ class Api::V1::PicturesController < Api::V1::BaseController
   end
 
   def picture_params
-    params.require(:picture).permit(:format, :width, :height, :url, :updated_at)
+    params.require(:picture).permit(:format, :width, :height, :url, :updated_at, :image_url, :image)
   end
 
   def render_error
