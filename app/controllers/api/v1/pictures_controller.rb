@@ -2,7 +2,7 @@ require 'open-uri'
 class Api::V1::PicturesController < Api::V1::BaseController
   require 'open-uri'
   acts_as_token_authentication_handler_for User
-  before_action :set_picture, only: [:show, :update, :destroy]
+  before_action :set_picture, only: [:show, :destroy]
 
   def index
     @pictures = policy_scope(Picture)
@@ -11,19 +11,19 @@ class Api::V1::PicturesController < Api::V1::BaseController
   def show
   end
 
-  def update
-    if @picture.update(picture_params)
-      render :show
-    else
-      render_error
-    end
-  end
+  # def update
+  #   if @picture.update(picture_params)
+  #     render :show
+  #   else
+  #     render_error
+  #   end
+  # end
 
   def create
     # begin
     @picture = Picture.new(picture_params)
     @picture.user = current_user
-    file_path = @picture.url
+    file_path = @picture.source
     authorize @picture
     if @picture.save
       if file_path[0,4] == "http"
@@ -32,6 +32,7 @@ class Api::V1::PicturesController < Api::V1::BaseController
         @picture.image.attach(io: File.open(file_path), filename: "u#{@picture.user_id}_p#{@picture.id}.#{@picture.format}")
       end
       @picture.image_url = url_for(@picture.image)
+      @picture.save
       render :show, status: :created
     else
       render_error
@@ -53,7 +54,7 @@ class Api::V1::PicturesController < Api::V1::BaseController
   end
 
   def picture_params
-    params.require(:picture).permit(:format, :width, :height, :url, :updated_at, :image_url, :image)
+    params.require(:picture).permit(:format, :width, :height, :source, :image_url, :image)
   end
 
   def render_error

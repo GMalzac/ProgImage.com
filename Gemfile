@@ -12,7 +12,7 @@ gem 'redis'
 gem 'pundit'
 gem "simple_token_authentication"
 gem "aws-sdk-s3", require: false
-gem 'carrierwave', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'

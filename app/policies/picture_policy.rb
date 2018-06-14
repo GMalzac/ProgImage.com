@@ -9,9 +9,9 @@ class PicturePolicy < ApplicationPolicy
     record.user == user
   end
 
-  def update?
-    record.user == user
-  end
+  # def update?
+  #   record.user == user
+  # end
 
   def create?
     !user.nil?
