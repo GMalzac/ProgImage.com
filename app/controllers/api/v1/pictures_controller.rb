@@ -21,7 +21,7 @@ class Api::V1::PicturesController < Api::V1::BaseController
     # begin
     @picture = Picture.new(picture_params)
     @picture.user = current_user
-    file_path = "/home/gregoiremalzac/Desktop/Pics/test.png"
+    file_path = @picture.url
     image = File.open file_path
     authorize @picture
     if @picture.save
