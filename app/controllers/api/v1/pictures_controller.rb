@@ -25,7 +25,7 @@ class Api::V1::PicturesController < Api::V1::BaseController
     image = File.open file_path
     authorize @picture
     if @picture.save
-      @picture.image.attach(io: File.open(file_path), filename: 'text.png')
+      @picture.image.attach(io: File.open(file_path), filename: "u#{@picture.user_id}_p#{@picture.id}")
       @picture.image_url = url_for(@picture.image)
       render :show, status: :created
     else
