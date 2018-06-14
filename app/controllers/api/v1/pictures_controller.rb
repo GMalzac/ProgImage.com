@@ -1,3 +1,4 @@
+require 'open-uri'
 class Api::V1::PicturesController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User
   before_action :set_picture, only: [:show, :update, :destroy]
@@ -22,10 +23,13 @@ class Api::V1::PicturesController < Api::V1::BaseController
     @picture = Picture.new(picture_params)
     @picture.user = current_user
     file_path = @picture.url
-    image = File.open file_path
     authorize @picture
     if @picture.save
-      @picture.image.attach(io: File.open(file_path), filename: "u#{@picture.user_id}_p#{@picture.id}")
+      if file_path[0,4] == "http"
+        @picture.image.attach(io: open(URI.parse(file_path)), filename: "u#{@picture.user_id}_p#{@picture.id}.#{@picture.format}")
+      else
+        @picture.image.attach(io: File.open(file_path), filename: "u#{@picture.user_id}_p#{@picture.id}.#{@picture.format}")
+      end
       @picture.image_url = url_for(@picture.image)
       render :show, status: :created
     else
