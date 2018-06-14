@@ -1,5 +1,6 @@
 require 'open-uri'
 class Api::V1::PicturesController < Api::V1::BaseController
+  require 'open-uri'
   acts_as_token_authentication_handler_for User
   before_action :set_picture, only: [:show, :update, :destroy]
 
