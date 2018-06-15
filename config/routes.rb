@@ -6,7 +6,7 @@ Rails.application.routes.draw do
         member do
           post 'jpeg', to:"pictures#jpeg"
           post 'gif', to:"pictures#gif"
-          post 'pnd', to:"pictures#png"
+          post 'png', to:"pictures#png"
           post 'tiff', to:"pictures#tiff"
         end
       end

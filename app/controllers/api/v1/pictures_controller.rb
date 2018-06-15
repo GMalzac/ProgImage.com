@@ -4,7 +4,7 @@ require 'mini_magick'
 class Api::V1::PicturesController < Api::V1::BaseController
 
   acts_as_token_authentication_handler_for User
-  before_action :set_picture, only: [:show, :destroy, :jpeg]
+  before_action :set_picture, only: [:show, :destroy, :jpeg, :gif, :png, :tiff]
 
   def index
     @pictures = policy_scope(Picture)
@@ -57,13 +57,71 @@ class Api::V1::PicturesController < Api::V1::BaseController
     # end
   end
 
-  # def perform(photo)
-  #   if photo.file.content_type != "image/jpeg"
-  #     image = MiniMagick::Image.open(url_for(photo.file))
-  #     image.format "jpeg"
-  #     photo.file.attach(io: File.open(image.path), filename: File.basename(image.path), content_type: "image/jpeg")
-  #   end
+  def gif
+    # begin
+    @picture = @picture.dup
+    file_path = @picture.source
+    pic = MiniMagick::Image.open(file_path)
+    pic.format "gif"
+    @picture.format = pic.type
+    @picture.width = pic.width
+    @picture.height = pic.height
+    authorize @picture
+    if @picture.save
+      @picture.image.attach(io: File.open(pic.path), filename: "u#{@picture.user_id}_p#{@picture.id}.#{@picture.format}")
+      @picture.image_url = url_for(@picture.image)
+      @picture.save
+      render :show, status: :created
+    else
+      render_error
+    end
+    # rescue => error
+    # end
+  end
 
+  def png
+    # begin
+    @picture = @picture.dup
+    file_path = @picture.source
+    pic = MiniMagick::Image.open(file_path)
+    pic.format "png"
+    @picture.format = pic.type
+    @picture.width = pic.width
+    @picture.height = pic.height
+    authorize @picture
+    if @picture.save
+      @picture.image.attach(io: File.open(pic.path), filename: "u#{@picture.user_id}_p#{@picture.id}.#{@picture.format}")
+      @picture.image_url = url_for(@picture.image)
+      @picture.save
+      render :show, status: :created
+    else
+      render_error
+    end
+    # rescue => error
+    # end
+  end
+
+  def tiff
+    # begin
+    @picture = @picture.dup
+    file_path = @picture.source
+    pic = MiniMagick::Image.open(file_path)
+    pic.format "tiff"
+    @picture.format = pic.type
+    @picture.width = pic.width
+    @picture.height = pic.height
+    authorize @picture
+    if @picture.save
+      @picture.image.attach(io: File.open(pic.path), filename: "u#{@picture.user_id}_p#{@picture.id}.#{@picture.format}")
+      @picture.image_url = url_for(@picture.image)
+      @picture.save
+      render :show, status: :created
+    else
+      render_error
+    end
+    # rescue => error
+    # end
+  end
 
   def destroy
     @picture.destroy
