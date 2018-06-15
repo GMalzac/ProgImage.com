@@ -9,6 +9,22 @@ class PicturePolicy < ApplicationPolicy
     record.user == user
   end
 
+  def jpeg?
+    record.user == user
+  end
+
+  def gif?
+    record.user == user
+  end
+
+  def png?
+    record.user == user
+  end
+
+  def tiff?
+    record.user == user
+  end
+
   # def update?
   #   record.user == user
   # end
