@@ -17,62 +17,60 @@ class Api::V1::PicturesController < Api::V1::BaseController
       @picture = Picture.new(u)
       @picture.user = current_user
       file_path = @picture.source
-      pic = MiniMagick::Image.open(file_path)
-      @picture.format = pic.type
-      @picture.width = pic.width
-      @picture.height = pic.height
+      @pic = MiniMagick::Image.open(file_path)
+      set_picture_details
       authorize @picture
-      create_active_storage(@picture, pic)
-      # render :index
+      create_active_storage(@picture, @pic)
     end
+    redirect_to api_v1_pictures_path
+  end
+
+  def duplicate
+    @picture = @picture.dup
+    file_path = @picture.source
+    @pic = MiniMagick::Image.open(file_path)
+  end
+
+  def set_picture_details
+    @picture.format = @pic.type
+    @picture.width = @pic.width
+    @picture.height = @pic.height
   end
 
   def jpeg
-    @picture = @picture.dup
-    file_path = @picture.source
-    pic = MiniMagick::Image.open(file_path)
-    pic.format "jpeg"
-    @picture.format = pic.type
-    @picture.width = pic.width
-    @picture.height = pic.height
+    duplicate
+    @pic.format "jpeg"
+    set_picture_details
     authorize @picture
-    create_active_storage(@picture, pic)
+    create_active_storage(@picture, @pic)
+    render :show, status: :created
   end
 
   def gif
-    @picture = @picture.dup
-    file_path = @picture.source
-    pic = MiniMagick::Image.open(file_path)
-    pic.format "gif"
-    @picture.format = pic.type
-    @picture.width = pic.width
-    @picture.height = pic.height
+    duplicate
+    @pic.format "gif"
+    set_picture_details
     authorize @picture
-    create_active_storage(@picture, pic)
+    create_active_storage(@picture, @pic)
+    render :show, status: :created
   end
 
   def png
-    @picture = @picture.dup
-    file_path = @picture.source
-    pic = MiniMagick::Image.open(file_path)
-    pic.format "png"
-    @picture.format = pic.type
-    @picture.width = pic.width
-    @picture.height = pic.height
+    duplicate
+    @pic.format "png"
+    set_picture_details
     authorize @picture
-    create_active_storage(@picture, pic)
+    create_active_storage(@picture, @pic)
+    render :show, status: :created
   end
 
   def tiff
-    @picture = @picture.dup
-    file_path = @picture.source
-    pic = MiniMagick::Image.open(file_path)
-    pic.format "tiff"
-    @picture.format = pic.type
-    @picture.width = pic.width
-    @picture.height = pic.height
+    duplicate
+    @pic.format "tiff"
+    set_picture_details
     authorize @picture
-    create_active_storage(@picture, pic)
+    create_active_storage(@picture, @pic)
+    render :show, status: :created
   end
 
   def create_active_storage(picture, pic)
@@ -80,7 +78,6 @@ class Api::V1::PicturesController < Api::V1::BaseController
       picture.image.attach(io: File.open(pic.path), filename: "u#{@picture.user_id}_p#{@picture.id}.#{@picture.format}")
       picture.image_url = url_for(@picture.image)
       picture.save
-
     else
       render_error
     end
@@ -94,8 +91,7 @@ class Api::V1::PicturesController < Api::V1::BaseController
   private
 
   def set_picture
-    raise
-    @picture = Picture.find(params([:id])
+    @picture = Picture.find(params[:id])
     authorize @picture
   end
 
