@@ -1,5 +1,4 @@
 class Picture < ApplicationRecord
-
   belongs_to :user
 
   validates :format, presence: true
@@ -8,5 +7,6 @@ class Picture < ApplicationRecord
   validates :source, presence: true
 
   has_one_attached :image
+
 
 end
