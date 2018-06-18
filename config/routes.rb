@@ -9,9 +9,9 @@ Rails.application.routes.draw do
           get 'png', to:"pictures#png"
           get 'tiff', to:"pictures#tiff"
         end
+        root to: 'pictures#index'
       end
     end
   end
-  root to: 'pictures#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
