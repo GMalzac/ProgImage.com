@@ -14,7 +14,7 @@ To build this API, I used:
 * pundit gem for authorizations management
 * minimagick for picture processing
 
-Due to timing constraints automated testing and deployment to production have not been tackled.
+Due to timing constraints automated testing and deployment to production could not be completed.
 
 
 ## Set up
