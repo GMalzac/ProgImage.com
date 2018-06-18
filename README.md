@@ -5,10 +5,11 @@ A specialised image storage and processing engine to be used by other applicatio
 This API handles most of the required features from the coding challenge:
 * Pictures upload from url / directory
 * Pictures bulk upload
+* Picture retrieving from id
 * Pictures formatting
 
 To build this API, I used:
-* ruby on rails with active storage (release with rails 5.2)
+* ruby on rails with active storage (released with rails 5.2)
 * devise gem for authentication
 * pundit gem for authorizations management
 * minimagick for picture processing
@@ -23,7 +24,6 @@ To set ProgImage.com, you need to first clone this repository, then:
   $ rails db:create
   $ rails db:migrate
 ```
-run bundle install, db:create and db:migrate
 
 
 ## Sign up
@@ -99,6 +99,7 @@ X-User-Token    BaLgKhKd6hsKKVRXywrs
 Once the request is completed, the API will render a JSON show of your record.
 You can access your uploaded picture using the image_url value.
 
+
 ## List all pictures
 You can list all your pictures by sending a GET request to http://localhost:3000/api/v1/pictures
 The header of your request should contain the content type, the user email and token.
@@ -112,6 +113,7 @@ X-User-Token    BaLgKhKd6hsKKVRXywrs
 Once the request is completed, the API will render the index view with highest from lowest ID.
 You can access any uploaded picture using its image_url value.
 
+
 ## Delete a picture
 You can delete a picture by sending a DELETE request to http://localhost:3000/api/v1/pictures/ID_OF_YOUR_PICTURE
 The header of your request should contain the content type, the user email and token.
@@ -122,7 +124,8 @@ X-User-Email    test@test.com
 X-User-Token    BaLgKhKd6hsKKVRXywrs
 ```
 
-Once the request is completed, the API will render  a 204 status.
+Once the request is completed, the API will render a 204 status.
+
 
 ## Picture format converter
 You can convert any picture into jpeg, png, gif and tiff formats by sending a GET request to http://localhost:3000/api/v1/pictures/ID_OF_YOUR_PICTURE/DESIRED_FORMAT
@@ -140,5 +143,5 @@ X-User-Email    test@test.com
 X-User-Token    BaLgKhKd6hsKKVRXywrs
 ```
 
-Once the request is completed, the API will render a JSON show of your record with the desired format.
+Once the request is completed, the API will render a JSON show of your new record with the desired format.
 You can access your transformed and uploaded picture using the image_url value.
