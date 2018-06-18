@@ -6,7 +6,7 @@ class Api::V1::PicturesController < Api::V1::BaseController
   before_action :set_picture, only: [:show, :destroy, :jpeg, :gif, :png, :tiff]
 
   def index
-    @pictures = policy_scope(Picture)
+    @pictures = policy_scope(Picture).order("id DESC")
   end
 
   def show
