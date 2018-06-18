@@ -9,7 +9,7 @@ This API handles most of the required features from the coding challenge:
 * Pictures formatting
 
 To build this API, I used:
-* ruby on rails with active storage (released with rails 5.2)
+* rails with active storage (released with rails 5.2)
 * devise gem for authentication
 * pundit gem for authorizations management
 * minimagick for picture processing
@@ -48,7 +48,7 @@ X-User-Email    test@test.com
 X-User-Token    BaLgKhKd6hsKKVRXywrs
 ```
 
-The body of your request should be
+The body of your POST request should be
 ```
 {"picture": [
   {"source": "URL_OR_FILEPATH_OF_YOUR_PICTURE"}
@@ -70,7 +70,7 @@ X-User-Email    test@test.com
 X-User-Token    BaLgKhKd6hsKKVRXywrs
 ```
 
-The body of your request should be
+The body of your POST request should be
 ```
 {"picture": [
   {"source": "URL_OR_FILEPATH_OF_YOUR_1ST_PICTURE"},
