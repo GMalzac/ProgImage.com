@@ -16,6 +16,6 @@ amazon:
 
 azure:
   service: AzureStorage
-  storage_account_name: ""
-  storage_access_key: ""
-  container: ""
+  storage_account_name: <%= ENV['AZURE_ACCOUNT_NAME'] %>
+  storage_access_key: <%= ENV['AZURE_ACCESS_KEY_ID'] %>
+  container: <%= ENV['AZURE_CONTAINER'] %>
