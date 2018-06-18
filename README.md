@@ -2,14 +2,25 @@
 A specialised image storage and processing engine to be used by other applications which provides high performance programmatic access via its API.
 
 ## Set up
-To set ProgImage.com, you need to clone this repository, run bundle install, db:create and db:migrate
+To set ProgImage.com, you need to clone this repository.
+Then run
+```
+  $ bundle install
+  $ rails db:create
+  $ rails db:migrate
+```
+run bundle install, db:create and db:migrate
 
 
 ## Sign up
-To sign up, open the terminale and create a new user :
+To sign up, open the console and create a new user :
+```
+$ rails c
+```
+Then:
+
 ```
 User.create(email:"YOUR_EMAIL", password:"YOUR_PASSWORD")
-
 ```
 The user is created! You can know copy the token displayed in the console.
 
