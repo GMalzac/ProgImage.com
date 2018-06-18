@@ -4,6 +4,7 @@ A specialised image storage and processing engine to be used by other applicatio
 ##Sign up / log in
 
 ##Uploading a picture
+To upload a picture from a url of a repository
 
 ##Uploading a batch of picture
 
