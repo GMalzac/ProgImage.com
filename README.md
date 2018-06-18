@@ -58,6 +58,7 @@ The body of your POST request should be
 ```
 
 Once the request is completed, the API will render the index view with highest from lowest ID.
+You can access your uploaded picture using the image_url value.
 
 
 ## Uploading a batch of picture
@@ -83,7 +84,7 @@ The body of your POST request should be
 ```
 
 Once the request is completed, the API will render a JSON index of your records with IDs sorted descending.
-You can access your uploaded picture using the image_url value.
+You can access your uploaded pictures using the image_url value.
 
 
 ## Retrieve a picture
