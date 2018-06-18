@@ -8,7 +8,6 @@ Rails.application.routes.draw do
           get 'gif', to:"pictures#gif"
           get 'png', to:"pictures#png"
           get 'tiff', to:"pictures#tiff"
-          get 'download', to: "picture#download"
         end
       end
     end

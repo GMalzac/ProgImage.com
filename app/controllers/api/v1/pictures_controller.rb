@@ -37,13 +37,6 @@ class Api::V1::PicturesController < Api::V1::BaseController
     @picture.height = @pic.height
   end
 
-
-  def download
-    file_path = @picture.source
-    @pic = MiniMagick::Image.open(file_path)
-    binary =  @pic.download
-  end
-
   def jpeg
     duplicate
     @pic.format "jpeg"
@@ -111,36 +104,3 @@ class Api::V1::PicturesController < Api::V1::BaseController
       status: :unprocessable_entity
   end
 end
-
-# def picture_params
-#   params.require(:picture).map do |p|
-#     ActionController::Parameters.new(p).permit(
-#       :source
-#     )
-#   end
-# end
-
-
-# def picture_params
-#   params.require(:pictures).each do |p|
-#     p.permit(:source)
-#   end
-# end
-
-
-# def picture_params
-#   params.require(:picture).permit(:source)
-# end
-
-
-  # def create
-  #   @picture = Picture.new(picture_params)
-  #   @picture.user = current_user
-  #   file_path = @picture.source
-  #   pic = MiniMagick::Image.open(file_path)
-  #   @picture.format = pic.type
-  #   @picture.width = pic.width
-  #   @picture.height = pic.height
-  #   authorize @picture
-  #   create_active_storage(@picture, pic)
-  # end

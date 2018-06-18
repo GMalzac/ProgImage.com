@@ -1,1 +1,20 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+#ProgImage.doc
+A specialised image storage and processing engine to be used by other applications which provides high performance programmatic access via its API.
+
+##Sign up / log in
+
+##Uploading a picture
+
+##Uploading a batch of picture
+
+
+##Retrieving a picture
+
+##List all pictures
+
+##Delete a picture
+
+##Picture format converter
+supported format
+
+##Picture resizing
