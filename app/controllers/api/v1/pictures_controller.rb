@@ -25,18 +25,6 @@ class Api::V1::PicturesController < Api::V1::BaseController
     redirect_to api_v1_pictures_path
   end
 
-  def duplicate
-    @picture = @picture.dup
-    file_path = @picture.source
-    @pic = MiniMagick::Image.open(file_path)
-  end
-
-  def set_picture_details
-    @picture.format = @pic.type
-    @picture.width = @pic.width
-    @picture.height = @pic.height
-  end
-
   def jpeg
     duplicate
     @pic.format "jpeg"
@@ -71,6 +59,18 @@ class Api::V1::PicturesController < Api::V1::BaseController
     authorize @picture
     create_active_storage(@picture, @pic)
     render :show, status: :created
+  end
+
+  def duplicate
+    @picture = @picture.dup
+    file_path = @picture.source
+    @pic = MiniMagick::Image.open(file_path)
+  end
+
+  def set_picture_details
+    @picture.format = @pic.type
+    @picture.width = @pic.width
+    @picture.height = @pic.height
   end
 
   def create_active_storage(picture, pic)
