@@ -15,3 +15,5 @@ yarn-error.log
 
 # Ignore application configuration
 /config/application.yml
+/config/master.key
+/config/storage.yml
