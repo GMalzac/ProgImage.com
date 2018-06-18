@@ -4,10 +4,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :pictures, only: [ :index, :show, :create, :destroy ] do
         member do
-          post 'jpeg', to:"pictures#jpeg"
-          post 'gif', to:"pictures#gif"
-          post 'png', to:"pictures#png"
-          post 'tiff', to:"pictures#tiff"
+          get 'jpeg', to:"pictures#jpeg"
+          get 'gif', to:"pictures#gif"
+          get 'png', to:"pictures#png"
+          get 'tiff', to:"pictures#tiff"
+          get 'download', to: "picture#download"
         end
       end
     end

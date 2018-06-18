@@ -25,6 +25,10 @@ class PicturePolicy < ApplicationPolicy
     record.user == user
   end
 
+  def download?
+    record.user == user
+  end
+
   # def update?
   #   record.user == user
   # end

@@ -3,7 +3,7 @@ require 'mini_magick'
 
 class Api::V1::PicturesController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User
-  before_action :set_picture, only: [:show, :destroy, :jpeg, :gif, :png, :tiff]
+  before_action :set_picture, only: [:show, :destroy, :jpeg, :gif, :png, :tiff, :download]
 
   def index
     @pictures = policy_scope(Picture).order("id DESC")
@@ -35,6 +35,13 @@ class Api::V1::PicturesController < Api::V1::BaseController
     @picture.format = @pic.type
     @picture.width = @pic.width
     @picture.height = @pic.height
+  end
+
+
+  def download
+    file_path = @picture.source
+    @pic = MiniMagick::Image.open(file_path)
+    binary =  @pic.download
   end
 
   def jpeg
